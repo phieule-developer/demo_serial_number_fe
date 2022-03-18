@@ -1,12 +1,28 @@
-import React from "react";
-import { Row, Col, Form, Input, Button, Checkbox } from 'antd';
+import React, { useState } from "react";
+import { Row, Col, Form, Input, Button, Typography } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import actions from '../../redux/actions/auth.action';
+import { Navigate } from "react-router-dom";
+
 import './index.css';
+const { Title } = Typography;
 
 const Login = () => {
-    const onFinish = (values) => {
+
+    const [email, setEmail] = useState("levanphieu99@gmail.com");
+    const [password, setPassword] = useState("abcd1234@");
+    const dispatch = useDispatch();
+
+    const pressLogin = () => {
+        dispatch(actions.actions.login(email, password));
     };
 
+    const authReducer = useSelector(state => state.authReducer);
+
+    if (authReducer.isLoggedIn) {
+        return <Navigate to="/" />
+    }
     return (
         <Row>
             <Col style={{ display: 'flex', alignItems: "center", background: "#5b8dd7", height: "100vh" }} span={12}>
@@ -23,8 +39,9 @@ const Login = () => {
 
                 <div style={{ marginLeft: "100px", width: "100vh" }}>
                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", width: "50%", height: "95vh", }}>
-                        <div style={{ display: "flex", justifyContent: "center", marginBottom: "50px" }}>
-                            <div>ĐĂNG NHẬP</div>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                            <Title level={2}>Đăng Nhập</Title>
+
                         </div>
                         <div>
                             <Form
@@ -33,7 +50,6 @@ const Login = () => {
                                 initialValues={{
                                     remember: true,
                                 }}
-                                onFinish={onFinish}
                             >
                                 <Form.Item
                                     name="Email"
@@ -44,7 +60,10 @@ const Login = () => {
                                         },
                                     ]}
                                 >
-                                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+                                    <Input
+                                        onChange={e => setEmail(e.target.value)}
+                                        prefix={<UserOutlined className="site-form-item-icon" />}
+                                        placeholder="Email" />
                                 </Form.Item>
                                 <Form.Item
                                     name="password"
@@ -56,6 +75,7 @@ const Login = () => {
                                     ]}
                                 >
                                     <Input
+                                        onChange={e => { setPassword(e.target.value) }}
                                         prefix={<LockOutlined className="site-form-item-icon" />}
                                         type="password"
                                         placeholder="Mật khẩu"
@@ -71,7 +91,7 @@ const Login = () => {
                                 </Form.Item>
                                 <Form.Item>
                                     <p style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                        <Button type="primary" htmlType="submit" onClick={pressLogin} className="login-form-button">
                                             Đăng Nhập
                                         </Button>
                                     </p>

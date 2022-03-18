@@ -1,16 +1,16 @@
 import React, { createElement, useState } from "react";
 import './index.css';
-import { Layout, Menu, Row, Col, Dropdown, Button, message } from 'antd';
+import { Layout, Menu, Row, Col, Dropdown, Button, message, } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-import { NavLink, Outlet } from "react-router-dom";
-import { Link, To } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider, Content } = Layout;
 const PageLayout = () => {
 
     const [collapse, setCollapse] = useState(false);
@@ -35,13 +35,13 @@ const PageLayout = () => {
         <Layout className="site-layout">
             <Sider className="site-layout-background" trigger={null} collapsible collapsed={collapse}>
                 <div className="logo" />
-                <Menu mode="inline" defaultSelectedKeys={['2']}>
+                <Menu mode="inline" defaultSelectedKeys={['1']}>
 
                     <Menu.Item key="1" icon={<UserOutlined />}>
-                        <Link to='home/dashboard'>  Trang chủ</Link>
+                        <Link to='home/dashboard'>Quản lý người dùng</Link>
                     </Menu.Item>
                     <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                        <Link to='home/user'>  Quản lý người dùng</Link>
+                        <Link to='home/log'>Quản lý log</Link>
                     </Menu.Item>
                 </Menu>
             </Sider>

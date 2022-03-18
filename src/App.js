@@ -2,13 +2,13 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import PageLayout from "./components/page-layout/page-layout.jsx";
+import AuthLayOut from "./components/auth-layout/AuthLayout";
 import authRoutes from "./routes/auth.routes";
 import Login from "./pages/auth/login.jsx";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<PageLayout></PageLayout>}>
+      <Route path="/" element={<AuthLayOut />}>
         {
           authRoutes.map(({ path, element, index }) => {
             const Element = element;

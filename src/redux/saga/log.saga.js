@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
-const apiUrl = `http://localhost:8000/api/log`;
+const apiUrl = `http://13.212.239.178:8000/api/log`;
 function getAllLog() {
     return fetch(apiUrl, {
         method: 'GET',
